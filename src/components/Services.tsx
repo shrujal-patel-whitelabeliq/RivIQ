@@ -2,39 +2,49 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { Layout, Palette, Megaphone, Smartphone } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { MagicBento } from "./MagicBento"
 
-const services = [
+const servicesData = [
   {
     title: "Web Development",
-    description: "Building fast, scalable, and secure web applications using modern technologies like Next.js, Laravel, and more.",
-    icon: <Layout className="text-primary" size={32} />,
-    color: "bg-primary/10",
+    description: "Building fast, scalable, and secure web applications using modern technologies like Next.js, Laravel, and React.",
+    label: "Core"
   },
   {
     title: "UI/UX Design",
-    description: "Creating intuitive and beautiful user interfaces that provide seamless digital experiences for your users.",
-    icon: <Palette className="text-primary" size={32} />,
-    color: "bg-primary/10",
+    description: "Creating intuitive and beautiful interfaces for seamless experiences.",
+    label: "Creative"
+  },
+  {
+    title: "AI Solutions",
+    description: "Integrating powerful AI models into your workflows.",
+    label: "Innovation"
   },
   {
     title: "Digital Marketing",
-    description: "Helping brands grow their online presence through data-driven strategies and creative content marketing.",
-    icon: <Megaphone className="text-primary" size={32} />,
-    color: "bg-primary/10",
+    description: "Data-driven strategies to grow your organic reach.",
+    label: "Growth"
+  },
+  {
+    title: "eCommerce Development",
+    description: "Shopify, WooCommerce, BigCommerce. Product catalogs, payment integrations, inventory systems, and checkout optimization. Built to sell, not just to look good.",
+    label: "Commerce"
   },
   {
     title: "Mobile App Development",
-    description: "Developing high-performance native and cross-platform mobile applications for iOS and Android.",
-    icon: <Smartphone className="text-primary" size={32} />,
-    color: "bg-primary/10",
+    description: "Developing high-performance native and cross-platform mobile apps for iOS and Android.",
+    label: "Mobile"
   },
+  {
+    title: "Cloud Architecture",
+    description: "Deploying and scaling applications on AWS and Vercel.",
+    label: "Infrastructure"
+  }
 ]
 
 export const Services = () => {
   return (
-    <section id="services" className="py-24 px-6 relative">
+    <section id="services" className="py-24 px-6 relative bg-soft-gray/10">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 space-y-4">
           <motion.h2
@@ -51,30 +61,23 @@ export const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="p-8 rounded-[2.5rem] bg-white border border-soft-gray shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-500 group relative overflow-hidden"
-            >
-              <div className={cn("inline-flex p-4 rounded-2xl mb-6 transition-transform duration-500 group-hover:scale-110", service.color)}>
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-bold text-deep-slate mb-4">{service.title}</h3>
-              <p className="text-muted-text text-sm leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* Floating accent blob in card */}
-              <div className={cn("absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-700", service.color)} />
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ delay: 0.1, duration: 0.7 }}
+        >
+          <MagicBento 
+            data={servicesData}
+            enableStars={true}
+            enableSpotlight={true}
+            enableBorderGlow={true}
+            enableTilt={true}
+            enableMagnetism={true}
+            clickEffect={true}
+            glowColor="59, 130, 246" // primary blue matching antialiased bg-primary
+          />
+        </motion.div>
       </div>
     </section>
   )

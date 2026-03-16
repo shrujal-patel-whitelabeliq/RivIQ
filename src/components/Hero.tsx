@@ -68,7 +68,7 @@ export const Hero = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group px-8 py-4 rounded-full bg-deep-slate text-white font-bold flex items-center gap-2 shadow-xl hover:bg-primary transition-all"
+            className="group flex items-center gap-2 px-8 py-4 rounded-full bg-deep-slate font-bold text-white hover:bg-primary transition-all shadow-lg hover:shadow-xl"
           >
             Get a Quote
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

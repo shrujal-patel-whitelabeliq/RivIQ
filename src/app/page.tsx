@@ -12,6 +12,7 @@ import { IndustriesServed } from "@/components/IndustriesServed"
 import { TrustSignals } from "@/components/TrustSignals"
 import { Testimonials } from "@/components/Testimonials"
 import { Contact } from "@/components/Contact"
+import { HowWeWork } from "@/components/HowWeWork"
 import { FAQ } from "@/components/FAQ"
 import { Footer } from "@/components/Footer"
 
@@ -27,6 +28,7 @@ export default function Home() {
       <IndustriesServed />
       <TrustSignals />
       <Testimonials />
+      <HowWeWork />
       <Contact />
       <FAQ />
       <Footer />
