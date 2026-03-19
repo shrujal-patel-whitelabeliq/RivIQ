@@ -30,6 +30,8 @@
   --shadow-premium: 0 10px 40px rgba(56, 73, 89, 0.08);
 
   --animate-float: float 6s infinite ease-in-out;
+  --animate-orbit-spin: orbit-spin 40s linear infinite;
+  --animate-orbit-spin-reverse: orbit-spin-reverse 40s linear infinite;
 }
 
 @keyframes float {
@@ -41,6 +43,26 @@
 
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@keyframes orbit-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin-reverse {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
   }
 }
 
