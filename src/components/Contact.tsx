@@ -5,6 +5,42 @@ import { motion } from "framer-motion"
 import { Send } from "lucide-react"
 
 export const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      projectType: formData.get('projectType'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        e.currentTarget.reset();
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 px-6 relative overflow-hidden">
       <div className="max-w-4xl mx-auto relative z-10">
@@ -24,11 +60,13 @@ export const Contact = () => {
             </p>
           </div>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-bold text-deep-slate/60 pl-2">Name</label>
               <input
                 type="text"
+                name="name"
+                required
                 placeholder="John Doe"
                 className="w-full px-6 py-4 rounded-2xl bg-white border border-soft-gray focus:border-primary outline-none transition-all"
               />
@@ -37,22 +75,26 @@ export const Contact = () => {
               <label className="text-sm font-bold text-deep-slate/60 pl-2">Email</label>
               <input
                 type="email"
+                name="email"
+                required
                 placeholder="john@example.com"
                 className="w-full px-6 py-4 rounded-2xl bg-white border border-soft-gray focus:border-primary outline-none transition-all"
               />
             </div>
             <div className="md:col-span-2 space-y-2">
               <label className="text-sm font-bold text-deep-slate/60 pl-2">Project Type</label>
-              <select className="w-full px-6 py-4 rounded-2xl bg-white border border-soft-gray focus:border-primary outline-none transition-all appearance-none">
-                <option>Web Development</option>
-                <option>UI/UX Design</option>
-                <option>Mobile App</option>
-                <option>Digital Marketing</option>
+              <select name="projectType" className="w-full px-6 py-4 rounded-2xl bg-white border border-soft-gray focus:border-primary outline-none transition-all appearance-none">
+                <option value="Web Development">Web Development</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Mobile App">Mobile App</option>
+                <option value="Digital Marketing">Digital Marketing</option>
               </select>
             </div>
             <div className="md:col-span-2 space-y-2">
               <label className="text-sm font-bold text-deep-slate/60 pl-2">Message</label>
               <textarea
+                name="message"
+                required
                 rows={4}
                 placeholder="Tell us about your project..."
                 className="w-full px-6 py-4 rounded-2xl bg-white border border-soft-gray focus:border-primary outline-none transition-all resize-none"
@@ -62,12 +104,20 @@ export const Contact = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-5 rounded-2xl bg-deep-slate text-white font-bold text-lg flex items-center justify-center gap-3 shadow-xl hover:shadow-primary/20 transition-all"
-                type="button"
+                disabled={isSubmitting}
+                className="w-full py-5 rounded-2xl bg-deep-slate text-white font-bold text-lg flex items-center justify-center gap-3 shadow-xl hover:shadow-primary/20 transition-all disabled:opacity-70"
+                type="submit"
               >
-                Request Proposal
-                <Send size={20} />
+                {isSubmitting ? 'Sending...' : 'Request Proposal'}
+                {!isSubmitting && <Send size={20} />}
               </motion.button>
+              
+              {submitStatus === 'success' && (
+                <p className="text-green-600 text-center mt-4 font-medium">Message sent successfully! We&apos;ll be in touch soon.</p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-red-500 text-center mt-4 font-medium">Failed to send message. Please try again.</p>
+              )}
             </div>
           </form>
         </motion.div>
