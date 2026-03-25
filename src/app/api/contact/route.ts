@@ -84,6 +84,14 @@ export async function POST(req: Request) {
       </html>
     `;
 
+    // Debug: confirm the API key is loaded (prints first 8 chars only for safety)
+    console.log('[Resend] API Key loaded:', process.env.RESEND_API_KEY ? process.env.RESEND_API_KEY.slice(0, 8) + '...' : 'MISSING');
+
+    const fromAddress = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    const toAddress = process.env.RESEND_TO_EMAIL || 'shrujalp@whitelabeliq.com';
+
+    console.log(`[Resend] Sending from: ${fromAddress} → to: ${toAddress}`);
+
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -91,20 +99,25 @@ export async function POST(req: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Acme <onboarding@resend.dev>', // The user will need to configure a verified domain in Resend
-        to: ['shrujalp@whitelabeliq.com'], // Use testing email or their own email address
+        from: `Super IT <${fromAddress}>`,
+        to: [toAddress],
         subject: `New Project Inquiry from ${name} - ${projectType}`,
         html: htmlContent,
       }),
     });
 
+    const responseBody = await res.json();
+    console.log('[Resend] Response status:', res.status);
+    console.log('[Resend] Response body:', JSON.stringify(responseBody));
+
     if (!res.ok) {
-      const errorData = await res.json();
-      return NextResponse.json({ error: errorData.message || 'Failed to send email' }, { status: res.status });
+      return NextResponse.json(
+        { error: responseBody.message || responseBody.name || 'Failed to send email', details: responseBody },
+        { status: res.status }
+      );
     }
 
-    const data = await res.json();
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json({ success: true, data: responseBody });
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json(
