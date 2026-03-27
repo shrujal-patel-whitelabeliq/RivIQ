@@ -3,6 +3,8 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Sparkles, Globe, Code } from "lucide-react"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 export const Hero = () => {
   return (
@@ -65,21 +67,25 @@ export const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group flex items-center gap-2 px-8 py-4 rounded-full bg-deep-slate font-bold text-white hover:bg-primary transition-all shadow-lg hover:shadow-xl"
-          >
-            Get a Quote
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 rounded-full bg-white border border-soft-gray font-bold text-deep-slate hover:bg-soft-gray/50 transition-colors"
-          >
-            Schedule Consultation
-          </motion.button>
+          <Link href="/#contact" passHref>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-deep-slate font-bold text-white hover:bg-primary transition-all shadow-lg hover:shadow-xl"
+            >
+              Get a Quote
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          </Link>
+          <Link href="/services" passHref>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 rounded-full bg-white border border-soft-gray font-bold text-deep-slate hover:bg-soft-gray/50 transition-colors"
+            >
+              View Services
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
     </section>
@@ -111,5 +117,3 @@ const FloatingCard = ({ className, icon, title, delay }: { className: string, ic
     <span className="text-sm font-semibold text-deep-slate pr-2">{title}</span>
   </motion.div>
 )
-
-import { cn } from "@/lib/utils"

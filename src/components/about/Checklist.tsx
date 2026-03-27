@@ -2,7 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const lessons = [
   "Performance directly impacts user trust",
@@ -50,6 +51,29 @@ export const Checklist = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-lg text-muted-text mb-6">
+            Ready to apply these principles to your project?
+          </p>
+          <Link href="#contact" passHref>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group inline-flex items-center gap-2 px-10 py-4 rounded-full bg-deep-slate text-white font-bold hover:bg-primary transition-all shadow-lg hover:shadow-xl"
+            >
+              Let&apos;s Work Together
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          </Link>
+        </motion.div>
       </div>
 
       {/* Decorative Blobs */}

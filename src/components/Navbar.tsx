@@ -10,8 +10,8 @@ import { Logo } from "./Logo"
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
+  { name: "AI Services", href: "/ai" },
   { name: "Technologies", href: "/#technologies" },
-  { name: "Industries", href: "/#industries" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/#contact" },
 ]

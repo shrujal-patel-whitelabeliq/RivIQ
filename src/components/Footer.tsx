@@ -4,6 +4,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { Twitter, Linkedin, Github, Instagram } from "lucide-react"
 import { Logo } from "./Logo"
+import Link from "next/link"
 
 export const Footer = () => {
   return (
@@ -12,18 +13,18 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand Info */}
           <div className="md:col-span-2 space-y-6">
-            <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 w-fit">
               <Logo className="w-8 h-8 text-primary" />
               <span className="font-bold text-lg tracking-tight text-deep-slate">Rivulet IQ</span>
-            </div>
+            </Link>
             <p className="text-muted-text max-w-sm">
               Leading the way in full-stack web development and digital transformation. Delivering smooth, futuristic interfaces for global brands.
             </p>
             <div className="flex items-center gap-4">
-              <SocialIcon icon={<Twitter size={20} />} />
-              <SocialIcon icon={<Linkedin size={20} />} />
-              <SocialIcon icon={<Github size={20} />} />
-              <SocialIcon icon={<Instagram size={20} />} />
+              <SocialIcon href="https://twitter.com" icon={<Twitter size={20} />} label="Twitter" />
+              <SocialIcon href="https://linkedin.com" icon={<Linkedin size={20} />} label="LinkedIn" />
+              <SocialIcon href="https://github.com" icon={<Github size={20} />} label="GitHub" />
+              <SocialIcon href="https://instagram.com" icon={<Instagram size={20} />} label="Instagram" />
             </div>
           </div>
 
@@ -31,10 +32,11 @@ export const Footer = () => {
           <div>
             <h4 className="font-bold text-deep-slate mb-6 uppercase text-xs tracking-widest">Company</h4>
             <ul className="space-y-4 text-sm text-muted-text">
-              <li><a href="#" className="hover:text-accent-blue transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-accent-blue transition-colors">Services</a></li>
-              <li><a href="#" className="hover:text-accent-blue transition-colors">Technologies</a></li>
-              <li><a href="#" className="hover:text-accent-blue transition-colors">Contact</a></li>
+              <li><Link href="/about" className="hover:text-accent-blue transition-colors">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-accent-blue transition-colors">Services</Link></li>
+              <li><Link href="/ai" className="hover:text-accent-blue transition-colors">AI Services</Link></li>
+              <li><Link href="/#technologies" className="hover:text-accent-blue transition-colors">Technologies</Link></li>
+              <li><Link href="/#contact" className="hover:text-accent-blue transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -42,8 +44,16 @@ export const Footer = () => {
           <div>
             <h4 className="font-bold text-deep-slate mb-6 uppercase text-xs tracking-widest">Contact</h4>
             <ul className="space-y-4 text-sm text-muted-text">
-              <li>hello@rivuletiq.io</li>
-              <li>+1 (555) 123-4567</li>
+              <li>
+                <a href="mailto:hello@rivuletiq.io" className="hover:text-accent-blue transition-colors">
+                  hello@rivuletiq.io
+                </a>
+              </li>
+              <li>
+                <a href="tel:+15551234567" className="hover:text-accent-blue transition-colors">
+                  +1 (555) 123-4567
+                </a>
+              </li>
               <li>123 Future Lane, Tech City, CA</li>
             </ul>
           </div>
@@ -52,8 +62,8 @@ export const Footer = () => {
         <div className="pt-8 border-t border-soft-gray flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-bold text-muted-text uppercase tracking-widest">
           <p>© 2026 Rivulet IQ. All rights reserved.</p>
           <div className="flex items-center gap-8">
-            <a href="#" className="hover:text-accent-blue transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-accent-blue transition-colors">Terms of Service</a>
+            <Link href="/privacy" className="hover:text-accent-blue transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-accent-blue transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
@@ -61,12 +71,16 @@ export const Footer = () => {
   )
 }
 
-const SocialIcon = ({ icon }: { icon: React.ReactNode }) => (
+const SocialIcon = ({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) => (
   <motion.a
-    href="#"
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={label}
     whileHover={{ y: -3, scale: 1.1 }}
     className="w-10 h-10 rounded-full bg-soft-gray flex items-center justify-center text-deep-slate hover:bg-primary hover:text-white transition-all"
   >
     {icon}
   </motion.a>
 )
+

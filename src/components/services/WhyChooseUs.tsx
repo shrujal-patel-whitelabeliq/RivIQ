@@ -3,6 +3,8 @@
 import React from "react";
 import { SectionWrapper } from "./SectionWrapper";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export const WhyChooseUs = () => {
   const points = [
@@ -41,6 +43,25 @@ export const WhyChooseUs = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-12 flex justify-center"
+        >
+          <Link href="#contact" passHref>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group inline-flex items-center gap-2 px-10 py-4 rounded-full bg-deep-slate text-white font-bold hover:bg-primary transition-all shadow-lg hover:shadow-xl"
+            >
+              Start a Project
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          </Link>
+        </motion.div>
       </div>
     </SectionWrapper>
   );

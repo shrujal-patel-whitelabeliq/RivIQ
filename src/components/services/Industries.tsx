@@ -3,6 +3,8 @@
 import React from "react";
 import { SectionWrapper } from "./SectionWrapper";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export const Industries = () => {
   const industries = ["Startups", "Growing Businesses", "Agencies", "Enterprise Teams"];
@@ -17,9 +19,19 @@ export const Industries = () => {
            transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl font-bold text-deep-slate mb-6">Who We Work With</h2>
-          <p className="text-lg text-muted-text">
+          <p className="text-lg text-muted-text mb-8">
             We partner with ambitious teams to deliver high-quality digital products. Whether you are launching a new startup, scaling an existing product, or acting as an agency partner, our robust architecture ensures you meet your goals efficiently.
           </p>
+          <Link href="#contact" passHref>
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-deep-slate text-white font-semibold text-sm hover:bg-primary transition-all shadow-md"
+            >
+              Work With Us
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          </Link>
         </motion.div>
         
         <motion.div 
