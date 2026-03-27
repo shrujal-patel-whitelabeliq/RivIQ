@@ -1,18 +1,19 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
 import { Logo } from "./Logo"
 
 const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "Services", href: "#services" },
-  { name: "Technologies", href: "#technologies" },
-  { name: "Industries", href: "#industries" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Technologies", href: "/#technologies" },
+  { name: "Industries", href: "/#industries" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/#contact" },
 ]
 
 export const Navbar = () => {
@@ -40,21 +41,21 @@ export const Navbar = () => {
         )}
       >
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Logo className="w-8 h-8 text-primary" />
           <span className="font-bold text-lg tracking-tight text-deep-slate">Rivulet IQ</span>
-        </div>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               className="text-sm font-medium text-deep-slate hover:text-accent-blue transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -84,14 +85,14 @@ export const Navbar = () => {
             className="absolute top-20 left-4 right-4 bg-white/90 backdrop-blur-xl p-8 rounded-3xl border border-white/20 shadow-2xl md:hidden flex flex-col gap-6 items-center"
           >
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 className="text-lg font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
             <button className="w-full py-4 rounded-full bg-deep-slate text-white font-bold hover:bg-primary transition-colors">
               Get a Quote

@@ -3,7 +3,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const steps = [
+export interface Step {
+  title: string;
+  description: string;
+  number: string;
+}
+
+const defaultSteps: Step[] = [
   {
     title: "Understand First",
     description: "We begin by understanding your business goals, audience, and technical requirements.",
@@ -31,7 +37,17 @@ const steps = [
   },
 ];
 
-export const ProcessSteps = () => {
+interface ProcessStepsProps {
+  title?: string;
+  description?: string;
+  steps?: Step[];
+}
+
+export const ProcessSteps = ({
+  title = "How We Work",
+  description = "A structured approach to ensure quality, efficiency, and success.",
+  steps = defaultSteps,
+}: ProcessStepsProps) => {
   return (
     <section className="py-24 px-6 relative">
       <div className="max-w-4xl mx-auto">
@@ -42,11 +58,13 @@ export const ProcessSteps = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-deep-slate mb-6">
-            How We Work
+            {title}
           </h2>
-          <p className="text-xl text-muted-text max-w-2xl mx-auto">
-            A structured approach to ensure quality, efficiency, and success.
-          </p>
+          {description && (
+            <p className="text-xl text-muted-text max-w-2xl mx-auto">
+              {description}
+            </p>
+          )}
         </motion.div>
 
         <div className="space-y-12">
