@@ -16,6 +16,7 @@ import { HowWeWork } from "@/components/HowWeWork"
 import { FAQ } from "@/components/FAQ"
 import { Footer } from "@/components/Footer"
 import InteractiveScene from "@/components/InteractiveScene"
+import { MissionVision } from "@/components/MissionVision"
 
 export default function Home() {
   return (
@@ -24,6 +25,8 @@ export default function Home() {
       <BackgroundBlobs />
       <Navbar />
       <Hero />
+
+      <MissionVision />
 
       <Services />
       <TechStack />
